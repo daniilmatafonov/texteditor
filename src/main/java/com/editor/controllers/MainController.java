@@ -21,26 +21,41 @@ public class MainController {
     @FXML
     private TextArea textArea;
 
-    public void newFile(){
-        fileActionModel.newFile();
+    public void newFile() {
+        clearTextArea();
+        final FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showSaveDialog(null);
+        fileActionModel.newFile(file.toPath());
+        textFile = fileActionModel.readFile(file.toPath());
+    }
+
+    private void clearTextArea(){
+        textArea.clear();
+    }
+
+    private void fillTextArea(){
+        textFile.data().parallelStream().forEach(textArea::appendText);
     }
 
     public void readFile(){
         final FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
         if (file !=null){
+            clearTextArea();
             textFile = fileActionModel.readFile(file.toPath());
-            textArea.clear();
-            textFile.data().parallelStream().forEach(textArea::appendText);
+            fillTextArea();
         }
     }
 
     public void saveFile(){
+        if (textArea.getText().isEmpty()){
+            textFile.clearData();
+        }
         FileActionModel.TextDocument textDocument = new FileActionModel.TextDocument(textFile.path(), Collections.singletonList(textArea.getText()));
         fileActionModel.saveFile(textDocument);
     }
 
     public void closeFile(){
-        fileActionModel.close();
+        fileActionModel.close(textFile);
     }
 }
