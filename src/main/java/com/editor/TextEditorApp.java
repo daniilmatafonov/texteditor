@@ -1,5 +1,6 @@
 package com.editor;
 
+import com.editor.controllers.MainController;
 import com.editor.model.FileActionModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
