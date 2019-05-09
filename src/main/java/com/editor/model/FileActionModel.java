@@ -42,23 +42,25 @@ public class FileActionModel {
         }
     }
 
-    public void close(TextDocument document){
-        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit from TextEditor without saving ?", ButtonType.OK, ButtonType.NO, ButtonType.CANCEL);
+    public void close(){
+        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit from TextEditor", ButtonType.OK, ButtonType.NO);
         alert.showAndWait();
-        handleResultCloseConfirmationDialog(alert, document);
+        handleResultCloseConfirmationDialog(alert);
     }
 
-    private void handleResultCloseConfirmationDialog(Alert alert, TextDocument document){
+    private void handleResultCloseConfirmationDialog(Alert alert){
         if (alert.getResult() == ButtonType.OK){
             Platform.exit();
         }
         if (alert.getResult() == ButtonType.NO){
-            saveFile(document);
-            Platform.exit();
-        }
-        if (alert.getResult() == ButtonType.CANCEL){
             alert.close();
         }
+    }
+
+    public void about() {
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION, "Copyright ® 2019 Daniil Matafonov");
+        alert.setTitle("TextEditor");
+        alert.show();
     }
 
     public static class TextDocument {

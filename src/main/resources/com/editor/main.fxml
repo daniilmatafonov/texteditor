@@ -23,7 +23,7 @@
                 </Menu>
                 <Menu text="Help">
                     <items>
-                        <MenuItem text="About"/>
+                        <MenuItem text="About" onAction="#about"/>
                     </items>
                 </Menu>
             </menus>

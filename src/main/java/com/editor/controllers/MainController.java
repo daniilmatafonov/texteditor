@@ -4,9 +4,8 @@ import com.editor.model.FileActionModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
-
 import java.io.File;
-import java.util.Collections;
+import java.util.Arrays;
 
 public class MainController {
 
@@ -34,7 +33,7 @@ public class MainController {
     }
 
     private void fillTextArea(){
-        textFile.data().parallelStream().forEach(textArea::appendText);
+      textFile.data().forEach(s -> textArea.appendText(s + "\n"));
     }
 
     public void readFile(){
@@ -51,11 +50,16 @@ public class MainController {
         if (textArea.getText().isEmpty()){
             textFile.clearData();
         }
-        FileActionModel.TextDocument textDocument = new FileActionModel.TextDocument(textFile.path(), Collections.singletonList(textArea.getText()));
+        FileActionModel.TextDocument textDocument = new FileActionModel.TextDocument(textFile.path(), Arrays.asList(textArea.getText().split("\n")));
         fileActionModel.saveFile(textDocument);
     }
 
     public void closeFile(){
-        fileActionModel.close(textFile);
+        saveFile();
+        fileActionModel.close();
+    }
+
+    public void about(){
+        fileActionModel.about();
     }
 }
