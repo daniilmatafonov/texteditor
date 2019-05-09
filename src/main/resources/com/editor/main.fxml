@@ -15,10 +15,10 @@
             <menus>
                 <Menu text="File">
                     <items>
-                        <MenuItem text="New" />
-                        <MenuItem text="Open" />
-                        <MenuItem text="Save" />
-                        <MenuItem text="Exit" />
+                        <MenuItem text="New" onAction="#newFile"/>
+                        <MenuItem text="Open" onAction="#readFile" />
+                        <MenuItem text="Save" onAction="#saveFile"/>
+                        <MenuItem text="Exit" onAction="#closeFile"/>
                     </items>
                 </Menu>
                 <Menu text="Help">
