@@ -1,5 +1,6 @@
 package com.editor.model;
 
+import com.editor.settings.AppSettings;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -58,8 +59,8 @@ public class FileActionModel {
     }
 
     public void about() {
-        final Alert alert = new Alert(Alert.AlertType.INFORMATION, "Copyright ® 2019 Daniil Matafonov");
-        alert.setTitle("TextEditor");
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION, AppSettings.COPYRIGHT_INFO);
+        alert.setTitle(AppSettings.APP_TITLE);
         alert.show();
     }
 
